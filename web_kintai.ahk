@@ -8,34 +8,31 @@ a::
 
 ;火
 s::
-	Loop, 4
-	{
-		dayfunc()
-	}
-	Send, {Tab 24}
+	skipDays(4)
 	weekloop()
 
 ;水
 d::
-	Loop, 3
-	{
-		dayfunc()
-	}
-	Send, {Tab 24}
+	skipDays(3)
 	weekloop()
 ;木
 f::
-	Loop, 2
-	{
-		dayfunc()
-	}
-	Send, {Tab 24}
+	skipDays(2)
 	weekloop()
 ;金
 g::
-	dayfunc()
-	Send, {Tab 24}
+	skipDays(1)
 	weekloop()
+
+
+skipDays(days){
+	Loop, %days%
+	{
+		dayfunc()
+	}
+	Send, {Tab 24} ;土日分
+}
+
 
 dayfunc(){
 	; 平日入力（8:30 - 17:00 / 45分休憩）
@@ -46,7 +43,6 @@ dayfunc(){
 	
 	; 次の日へ（1日分移動）
     	Send, {Tab 5}
-	return
 }
 
 weekloop(){
@@ -56,7 +52,7 @@ weekloop(){
 		{
 			dayfunc()
 		}
-		Send, {Tab 24}
+		Send, {Tab 24} ;土日分
 	}
 	ExitApp
 }
